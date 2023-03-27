@@ -1,8 +1,43 @@
-# rice-classifier
-Using Edge Impulse to Identify Rice Variety
 
 
-n Edge Impulse, create a new Project, give it a name, and click on Data Acquisition on the left.  Next, click on Upload Data at the top of the screen, and on this page you can select the files to upload (one class at a time, but you can do all 15,000 in one pass), Leave the default choice of **Automatically split between training and testing**, and be sure to type in a Label, corresponding to the type of rice images you are uploading.  So in this example, the Label is set to Arborio:
+# Using Rice to Explore Dataset Quality and Test the Limits of Computer Vision
+
+![](img/rice-field-1.jpg)
+
+## Introduction
+
+While on a recent work trip, I had the opportunity to learn about rice farming, and when a colleague told me a bit more about the logistics and distribution of rice through the supply chain, I became more intrigued on whether or not machine learning and computer vision could play a role in the supply chain.  At the start of the process, traditional IoT and more recent “smart farming” could certainly be applied to monitor rice paddy water levels, cameras could be deployed to watch seed growth and estimate plant height, and time-series dashboards could be built to monitor these factors.
+
+But the supply chain and logistics of transporting and shipping rice, needs different solutions.  There is of course an IoT component once again, where temperature and humidity are monitored as rice is stored in large mounds, prior to being bagged or boxed for sale.  But one interesting problem experienced in the warehousing portion of the supply chain, is simply identifying what type of rice is even being stored and moved around.
+
+![](img/bulk-rice.jpg)
+
+It turns out, there are experts who have enough experience with the various strains of rice that they can simply look at a few grains and identify the rice as Basmati, Jasmine, Ipsala, Arborio, or other varieties.  But to most common truck drivers, loading workers, and bulk storage staff, rice strains are indistinguishable from one another.  This prompted us to look closer at the problem, and explore the current limits of data and computer vision capabilities.
+
+![](img/yard.jpg)
+
+## Rice Classification
+
+The goal of the project is to determine whether or not we can use Image Classification to accurately identify the variety of rice in front of a camera.  Generally speaking this means training a machine learning model on a dataset of known rice strains, and then deploying the model to a device to try to make accurate predictions of rice grain varieties.  We’ll use Edge Impulse in this project, to collect data, build the model, and deploy the model to a device.  
+
+![](img/arborio.jpg)
+
+## Dataset Curation
+
+Any machine learning project begins with capturing high quality data, to be curated into a dataset.  This process can be time consuming, but teams that invest in collecting high-quality data, can build high-quality machine learning models.  Poor data, not enough data, or unvaried data, can lead to models that are not accurate or not flexible enough to generalize to varying real-world conditions.  In this particular case, conditions will not vary too widely, as lighting and the target object (rice) will not deviate too greatly, but it is still a factor to always consider.
+
+There are two ways to collect data for this project:
+
+ - Use a ready-made dataset from a source like HuggingFace or Kaggle, where community members have spent time building large datasets for public use.
+ - Take lots of pictures of the exact types of rice you want to attempt to classify, building your own dataset with your own data.
+
+We are going to explore both in this project, as there are pros and cons to each, and some lessons learned along the way that are valuable to document.
+
+## Existing Dataset
+
+In an effort to speed up dataset collection, I had a look at Kaggle, and sure enough a generous community member has already gone through the time-consuming task of taking pictures of grains of rice.  In fact, the Rice Image Dataset from Murat Koklu has 75,000 pictures of rice grains split among 5 varieties.  So, I _could_ take 15,000 pictures each of a few varieties that I have, or I could just use his data.  So let’s go with his.  You can find the dataset here https://www.kaggle.com/datasets/muratkokludataset/rice-image-dataset, and download the .zip file.  Once you extract it, you will have 5 folders on your computer, named per the variety of rice, and each with 15,000 pictures in it.  Click on a few to have a look at them, and you will notice they are individual grains of rice, on a black background, 250 pixels by 250 pixels.
+
+In Edge Impulse, create a new Project, give it a name, and click on Data Acquisition on the left.  Next, click on Upload Data at the top of the screen, and on this page you can select the files to upload (one class at a time, but you can do all 15,000 in one pass), Leave the default choice of **Automatically split between training and testing**, and be sure to type in a Label, corresponding to the type of rice images you are uploading.  So in this example, the Label is set to Arborio:
 
 ![](img/upload-1.png)
 
@@ -65,3 +100,6 @@ That leads us to the second method of collecting data for a machine learning pro
 ## Collect Your Own Dataset
 
 Now that we have explored the “quicker” method of using an existing dataset, which as you can see may or may not work reliably for your machine learning projects, we can return to the earlier point of dataset quality and capturing data yourself.  This will take much longer, but for enterprise machine learning projects at scale, having a dataset that you know represents real-world conditions, aligns to the environmental conditions of your deployed devices, and simply knowing what is in the data will have a dramatic effect on the outcome of your project.  In this particular case, this means we need to collect several hundred pictures of grains of rice.  Eliminating the pure black background, having a consistent level of zoom that matches my phone, and lighting in my room will better align our images being fed into the model creation, hopefully resulting in a model that is more accurate upon deployment back to the phone later.
+
+
+
