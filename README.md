@@ -71,9 +71,9 @@ With Model Testing looking very encouraging, let’s go ahead and try out the mo
 
 Now, grab some Arborio, and some Basmati, and give it a try.  I had to use a magnifying glass to get a bit closer to the rice, as my phone camera couldn’t focus closely enough without it.  But with a magnifying glass to zoom in closer, the model does indeed work, and can differentiate between Basmati and Arborio rice!
 
-<img src="img/inference-1.png" align="center" height="25%">
+<img src="img/inference-1.png" width="500">
 
-<img src="img/inference-2.png" align="center" height="25%">
+<img src="img/inference-2.png" width="500">
 
 However, this works because these two varieties of rice do indeed look rather different.  Even my untrained eye can tell them apart, as the Basmati is longer and thinner, and the Arborio is shorter and wider.  They are different enough that the model can distinguish between them easily.  So, let’s try another variety of rice, and see what happens.
 
