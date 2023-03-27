@@ -6,7 +6,7 @@
 
 ## Introduction
 
-While on a recent work trip, I had the opportunity to learn about rice farming, and when a colleague told me a bit more about the logistics and distribution of rice through the supply chain, I became more intrigued on whether or not machine learning and computer vision could play a role in the supply chain.  At the start of the process, traditional IoT and more recent “smart farming” could certainly be applied to monitor rice paddy water levels, cameras could be deployed to watch seed growth and estimate plant height, and time-series dashboards could be built to monitor these factors.
+While on a recent work trip, I had the opportunity to learn about rice farming, and when a colleague told me a bit more about the logistics and distribution of rice through the supply chain, I became more intrigued on whether or not machine learning and computer vision could play a role in the distribution process.  At the start of the journey, traditional IoT and more recent “smart farming” could certainly be applied to monitor rice paddy water levels, cameras could be deployed to watch seed growth and estimate plant height, and time-series dashboards could be built to monitor these factors.
 
 But the supply chain and logistics of transporting and shipping rice, needs different solutions.  There is of course an IoT component once again, where temperature and humidity are monitored as rice is stored in large mounds, prior to being bagged or boxed for sale.  But one interesting problem experienced in the warehousing portion of the supply chain, is simply identifying what type of rice is even being stored and moved around.
 
@@ -20,7 +20,7 @@ It turns out, there are experts who have enough experience with the various stra
 
 The goal of the project is to determine whether or not we can use Image Classification to accurately identify the variety of rice in front of a camera.  Generally speaking this means training a machine learning model on a dataset of known rice strains, and then deploying the model to a device to try to make accurate predictions of rice grain varieties.  We’ll use Edge Impulse in this project, to collect data, build the model, and deploy the model to a device.  
 
-![](img/arborio.jpg)
+![](img/rice.jpg)
 
 ## Dataset Curation
 
@@ -35,13 +35,15 @@ We are going to explore both in this project, as there are pros and cons to each
 
 ## Existing Dataset
 
-In an effort to speed up dataset collection, I had a look at Kaggle, and sure enough a generous community member has already gone through the time-consuming task of taking pictures of grains of rice.  In fact, the Rice Image Dataset from Murat Koklu has 75,000 pictures of rice grains split among 5 varieties.  So, I _could_ take 15,000 pictures each of a few varieties that I have, or I could just use his data.  So let’s go with his.  You can find the dataset here https://www.kaggle.com/datasets/muratkokludataset/rice-image-dataset, and download the .zip file.  Once you extract it, you will have 5 folders on your computer, named per the variety of rice, and each with 15,000 pictures in it.  Click on a few to have a look at them, and you will notice they are individual grains of rice, on a black background, 250 pixels by 250 pixels.
+In an effort to speed up dataset collection, I had a look at Kaggle, and sure enough a generous community member has already gone through the time-consuming task of taking pictures of grains of rice.  In fact, the Rice Image Dataset from Murat Koklu has 75,000 pictures of rice grains split among 5 varieties.  So, I _could_ take 15,000 pictures each of a few varieties that I have, or I could just use his data.  Let’s go with his.  You can find the dataset here https://www.kaggle.com/datasets/muratkokludataset/rice-image-dataset, and download the .zip file.  Once you extract it, you will have 5 folders on your computer, named per the variety of rice, and each with 15,000 pictures in it.  Click on a few to have a look at them, and you will notice they are individual grains of rice, on a black background, 250 pixels by 250 pixels.
 
-In Edge Impulse, create a new Project, give it a name, and click on Data Acquisition on the left.  Next, click on Upload Data at the top of the screen, and on this page you can select the files to upload (one class at a time, but you can do all 15,000 in one pass), Leave the default choice of **Automatically split between training and testing**, and be sure to type in a Label, corresponding to the type of rice images you are uploading.  So in this example, the Label is set to Arborio:
+![](img/arborio.jpg)
+
+In Edge Impulse, create a new Project, give it a name, and click on Data Acquisition on the left.  Next, click on Upload Data at the top of the screen, and on this page you can select the files to upload (one class at a time, but you can do all 15,000 in one bulk upload), Leave the default choice of **Automatically split between training and testing**, and be sure to type in a Label, corresponding to the type of rice images you are uploading.  So in this example, the Label is set to Arborio:
 
 ![](img/upload-1.png)
 
-I then repeated this process for Basmati, and have left alone Jasmie, Ipsala, and Karakadac for now.
+I then repeated this process for Basmati, and have left aside Jasmie, Ipsala, and Karakadac for now.
 
 With the data in place, we can proceed to have a quick look at the images by clicking on Training Data at the top of the page, and then selecting a few images from the list of the images that were uploaded.  They are exactly as they appeared locally on your computer after you unzipped the Kaggle download.
 
@@ -51,9 +53,11 @@ Before we explore the alternative process, collecting your own data from picture
 
 On the left, click on Create Impulse.  In the first block, Image Data, you can set the image to 250 by 250, as that is the size of our images from Kaggle.  Click on Add a Processing Block, and choose Image.  Click on Add a Learning Block, and choose Transfer Learning (Images).  Finally, click Save Impulse.
 
-![](img/impulse.png)
+![](img/impulse-1.png)
 
 Next, click on Image on the left navigation, to load the Processing Block details.  We can leave RGB selected, and click Save Parameters.  Next, at the top, click Generate Features, and then click the green Generate Features button to start the process.  It will take a few minutes while it parses through all 30,000 images, but you will come away with a visualization of the dataset, that shows nice separation and clustering of the data.  
+
+![](img/features-1.png)
 
 Click on Transfer Learning, on the left, to begin the process of training the model.  I am planning on running the model directly on a phone or tablet, as opposed to a microcontroller, so I am going to choose a large Neural network architecture to hopefully increase accuracy.  You can click on “Choose a different model” and have a look at the memory usage, and balance your needs accordingly, but I’ve selected **MobileNetv2 160x160 1.0** and I have bumped up the number of training cycles to 50.  At the bottom, click the green “Start Training” button.  This will take a while to complete.
 
@@ -71,9 +75,9 @@ With Model Testing looking very encouraging, let’s go ahead and try out the mo
 
 Now, grab some Arborio, and some Basmati, and give it a try.  I had to use a magnifying glass to get a bit closer to the rice, as my phone camera couldn’t focus closely enough without it.  But with a magnifying glass to zoom in closer, the model does indeed work, and can differentiate between Basmati and Arborio rice!
 
-<img src="img/inference-1.png" width="500">
+![](img/inference-1.png)
 
-<img src="img/inference-2.png" width="500">
+![](img/inference-2.png)
 
 However, this works because these two varieties of rice do indeed look rather different.  Even my untrained eye can tell them apart, as the Basmati is longer and thinner, and the Arborio is shorter and wider.  They are different enough that the model can distinguish between them easily.  So, let’s try another variety of rice, and see what happens.
 
@@ -93,15 +97,19 @@ To find out, click on Transfer Learning on the left, verify that the settings ma
 
 ![](img/training-3.png)
 
-You can use the QR code to once again launch inferencing directly in the phone’s browser, and placing a few grains of Basmati and a few grains of Jasmine next to each other, I found that the model is far less accurate, and has trouble correctly identifying the species of rice.  In some cases, it is simply incorrect, in others the model flips back and forth between Basmati, Jasmine, or “Uncertain”, meaning it simply can’t figure out which variety it is.  Of course, it did get some correct, but overall the model was not reliable enough to consider it a success.  Perhaps additional training cycles could help, or, modifying parameters and creating a fine-tuned model can help improve functionality.  But let’s also consider the dataset for a moment.  Essentially, we used *someone else’s** data, and while it’s great they made their work public, unless we replicate their exact conditions, our environment does not match their environment.  Do we know anything about the lighting they used?  Do we know the exact distance from the camera to the rice grain, and what level of zoom they used?  What about the pure black background, which I do not have replicated here?  Thus, with 15,000 images exhibiting those pre-defined conditions, but my local conditions not being an exact match, our model is not generalized enough to be effective in my situation.  
+You can use the QR code to once again launch inferencing directly in the phone’s browser, and placing a few grains of Basmati and a few grains of Jasmine next to each other, I found that the model is far less accurate, and has trouble correctly identifying the species of rice.  In some cases, it is simply incorrect, in others the model flips back and forth between Basmati, Jasmine, or “Uncertain”, meaning it simply can’t figure out which variety it is.  Of course, it did get some correct, but overall the model was not reliable enough to consider it a success.  Perhaps additional training cycles could help, or, modifying parameters and creating a fine-tuned model can help improve functionality.  But let’s also consider the dataset for a moment.  Essentially, we used _someone else’s_ data, and while it’s great they made their work public, unless we replicate their exact conditions, our environment does not match their environment.  Do we know anything about the lighting they used?  Do we know the exact distance from the camera to the rice grain, and what level of zoom they used?  What about the pure black background, which I do not have replicated here?  Thus, with 15,000 images exhibiting those pre-defined conditions, but my local conditions not being an exact match, our model is not generalized enough to be effective in my situation.  
 
 While it was convenient to use ready-made data, unless we replicate the precise conditions used when those images of rice were collected, our model performance will suffer.  
 
-That leads us to the second method of collecting data for a machine learning project, which is certainly more time consuming but can hopefully lead to more accurate results and a better-performing computer vision model:  Collecting your own data. 
+That leads us to the second method of collecting data for a machine learning project, which is certainly more time consuming but can hopefully lead to more accurate results and a better-performing computer vision model:  collecting your own data. 
 
 ## Collect Your Own Dataset
 
 Now that we have explored the “quicker” method of using an existing dataset, which as you can see may or may not work reliably for your machine learning projects, we can return to the earlier point of dataset quality and capturing data yourself.  This will take much longer, but for enterprise machine learning projects at scale, having a dataset that you know represents real-world conditions, aligns to the environmental conditions of your deployed devices, and simply knowing what is in the data will have a dramatic effect on the outcome of your project.  In this particular case, this means we need to collect several hundred pictures of grains of rice.  Eliminating the pure black background, having a consistent level of zoom that matches my phone, and lighting in my room will better align our images being fed into the model creation, hopefully resulting in a model that is more accurate upon deployment back to the phone later.
+
+
+
+
 
 
 
