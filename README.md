@@ -71,13 +71,15 @@ With Model Testing looking very encouraging, let’s go ahead and try out the mo
 
 Now, grab some Arborio, and some Basmati, and give it a try.  I had to use a magnifying glass to get a bit closer to the rice, as my phone camera couldn’t focus closely enough without it.  But with a magnifying glass to zoom in closer, the model does indeed work, and can differentiate between Basmati and Arborio rice!
 
-<<<phone screenshot of Arborio, Basmati>>>
+![](img/inference-1.png)
+
+![](img/inference-2.png)
 
 However, this works because these two varieties of rice do indeed look rather different.  Even my untrained eye can tell them apart, as the Basmati is longer and thinner, and the Arborio is shorter and wider.  They are different enough that the model can distinguish between them easily.  So, let’s try another variety of rice, and see what happens.
 
 Returning to Data Acquisition (on the left navigation), click on the “Filter” icon to access the filtering options, and select Arborio (make sure Basmati is unchecked).  Then click on the “Select multiple items” icon, place a check in the header row to select all 12,000 Arborio images, and click the “Disable selected” button.  This will remove them from our Training, effectively eliminating them from our model.  Note that we did not **Delete** the data (though that is also possible to do), we are simply setting it inactive.  Now, let’s repeat the data upload process we performed earlier, this time selecting “Jasmine” and adding it to the dataset.  Click on Upload data at the top of the page, select all 15,000 images from the Jasmine folder, leave **Automatically split between training and testing** selected, enter “Jasmine” into the label box, and click “Begin upload”.
 
-<<<screenshot of jasmine upload>>>
+![](img/upload-2.png)
 
 Once completed, the images will be added to the dataset, and we can go through the same steps as previously to build a model.  
 
@@ -85,11 +87,11 @@ Once completed, the images will be added to the dataset, and we can go through t
 
 Click on Create Impulse on the left navigation, and the settings will have persisted from our previous machine learning pipeline, though the class names will now reflect Basmati and Jasmine.  Click on Image on the left, once again leave RGB selected, click “Save parameters”, then proceed to “Generate features”.  Click the “Generate features” button, and wait while the data is analyzed.  At the end of the process, you will once again see a visual representation of the dataset, but note that the discreet objects have significant overlap this time.  These two classes are much closer in observed features, with significant overlapping in the circular structure.  This may not bode well for the classification model we are about to construct.
 
-<<<screenshot of jasmine versus basmati dataset>>>
+![](img/features-2.png)
 
 To find out, click on Transfer Learning on the left, verify that the settings match the previous training cycle we performed earlier, and click “Start Training”.  Like last time, this will take a while, but once completed we can immediately see that this model is a little bit less confident in predictions, and once again the data overlaps significantly in the Feature Explorer view.  We can also use the Model Testing feature to let the model do a test run on the unseen data like last time, but as this project is simple enough to deploy, we’ll jump straight to running it again on the phone.  
 
-<<<screenshot of jasmine versus basmati training>>>
+![](img/training-3.png)
 
 You can use the QR code to once again launch inferencing directly in the phone’s browser, and placing a few grains of Basmati and a few grains of Jasmine next to each other, I found that the model is far less accurate, and has trouble correctly identifying the species of rice.  In some cases, it is simply incorrect, in others the model flips back and forth between Basmati, Jasmine, or “Uncertain”, meaning it simply can’t figure out which variety it is.  Of course, it did get some correct, but overall the model was not reliable enough to consider it a success.  Perhaps additional training cycles could help, or, modifying parameters and creating a fine-tuned model can help improve functionality.  But let’s also consider the dataset for a moment.  Essentially, we used *someone else’s** data, and while it’s great they made their work public, unless we replicate their exact conditions, our environment does not match their environment.  Do we know anything about the lighting they used?  Do we know the exact distance from the camera to the rice grain, and what level of zoom they used?  What about the pure black background, which I do not have replicated here?  Thus, with 15,000 images exhibiting those pre-defined conditions, but my local conditions not being an exact match, our model is not generalized enough to be effective in my situation.  
 
