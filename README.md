@@ -59,7 +59,7 @@ Next, click on Image on the left navigation, to load the Processing Block detail
 
 ![](img/features-1.png)
 
-Click on Transfer Learning, on the left, to begin the process of training the model.  I am planning on running the model directly on a phone or tablet, as opposed to a microcontroller, so I am going to choose a large Neural network architecture to hopefully increase accuracy.  You can click on “Choose a different model” and have a look at the memory usage, and balance your needs accordingly, but I’ve selected **MobileNetv2 160x160 1.0** and I have bumped up the number of training cycles to 50.  At the bottom, click the green “Start Training” button.  This will take a while to complete.
+Click on Transfer Learning, on the left, to begin the process of training the model.  I am planning on running the model directly on a phone or tablet, as opposed to a microcontroller, so I am going to choose a large Neural network architecture to hopefully increase accuracy.  You can click on “Choose a different model” and have a look at the memory usage, and balance your needs accordingly, but I’ve selected **MobileNetV2 160x160 1.0** and I have bumped up the number of training cycles to 50.  At the bottom, click the green “Start Training” button.  This will take a while to complete.
 
 ![](img/training-1.png)
 
@@ -73,11 +73,13 @@ When we uploaded the images earlier, we left **Automatically split between train
 
 With Model Testing looking very encouraging, let’s go ahead and try out the model in the real world by using it directly on a smartphone.  Simply click on “Deployment” on the left, scroll down to the bottom and click on Smartphone, and click “Build”.  A modal will open up with a QR code, use your phone’s camera to scan the code and launch its web browser, the project will take a moment to compile, and then inferencing will begin right  on your phone!  
 
+![](img/build.png)
+
 Now, grab some Arborio, and some Basmati, and give it a try.  I had to use a magnifying glass to get a bit closer to the rice, as my phone camera couldn’t focus closely enough without it.  But with a magnifying glass to zoom in closer, the model does indeed work, and can differentiate between Basmati and Arborio rice!
 
-![](img/inference-1.png)
+<img src="img/inference-1.png" width="500">
 
-![](img/inference-2.png)
+<img src="img/inference-2.png" width="500">
 
 However, this works because these two varieties of rice do indeed look rather different.  Even my untrained eye can tell them apart, as the Basmati is longer and thinner, and the Arborio is shorter and wider.  They are different enough that the model can distinguish between them easily.  So, let’s try another variety of rice, and see what happens.
 
