@@ -107,7 +107,29 @@ That leads us to the second method of collecting data for a machine learning pro
 
 ## Collect Your Own Dataset
 
-Now that we have explored the “quicker” method of using an existing dataset, which as you can see may or may not work reliably for your machine learning projects, we can return to the earlier point of dataset quality and capturing data yourself.  This will take much longer, but for enterprise machine learning projects at scale, having a dataset that you know represents real-world conditions, aligns to the environmental conditions of your deployed devices, and simply knowing what is in the data will have a dramatic effect on the outcome of your project.  In this particular case, this means we need to collect several hundred pictures of grains of rice.  Eliminating the pure black background, having a consistent level of zoom that matches my phone, and lighting in my room will better align our images being fed into the model creation, hopefully resulting in a model that is more accurate upon deployment back to the phone later.
+Now that we have explored the “easy” method of using an existing dataset, which as you can see may or may not work reliably for your machine learning projects, we can return to the earlier point of dataset quality and capturing data yourself.  This will take much longer, but for enterprise machine learning projects at scale, having a dataset that you know represents real-world conditions, aligns to the environmental settings of your deployed devices, and simply knowing what is in the data will have a dramatic effect on the outcome of your project.  In this particular case, this means we need to collect several hundred pictures of grains of rice.  Eliminating the pure black background, having a consistent level of zoom that matches my phone, and lighting in my room will better align our images being fed into the model creation, hopefully resulting in a model that is more accurate upon deployment back to the phone later.
+
+Before we proceed, we can actually save a current version of the project, in case our theory does not prove successful, and we’d like to revert back to the existing dataset and Impulse we built.  Click on Versioning on the left navigation, and then click on the “Create your first version” button.  In the popup, you can add a description, and click “Store version” to begin the process.  There are 45,000 images at this point, so it will take a few minutes to complete.
+
+![](img/versioning.png)
+
+Once it has finished, click on Data Acquisition on the left navigation, and we are going to follow a similar process as earlier, this time disabling **ALL** of the images we have in the dataset.  Click on the “Filter” icon, click on the “Select multiple items” icon, and put a check mark in the header row to select all 36,000 images in the Training dataset, and click “Disable selected”.  Then click on Test Data at the top, and repeat the process to disable the 9,000 images in the Test set.  
+
+![](img/disable-data.png)
+
+Now it is time to take your own pictures, so have your rice ready!  Click on Dashboard on the left navigation, and scan the QR code on the right side of the page with your cell phone, to put your phone into data collection mode.  If the inferencing starts (using the last model we built), simply tap on “Switch to data collection mode” below the camera view.  Tap on “Label” above the camera view, to set the label for the first type of rice to be collected, I’ll go with Basmati first.  
+
+![](img/collection-1.png)
+
+You can take pictures by clicking on “Capture”.  Using a few grains of Basmati, zoom in close and take pictures, varying the rotation, lighting and shadows, position in the frame, and build up a collection of a few hundred images if possible.  If you have the Studio open, you will the images stream in to the Data Acquisition page as they are taken.  Repeat the process for Jasmine, making sure that you set the Label accordingly when you transition from Basmati to Jasmine (or your preferred variety of rice).  
+
+![](img/dataset-2.png)
+
+Once you have a few hundred images of each collected, we can once again build a model.  Note that the count of items still indicates the disabled data, 36,139 in my case, though the disabled data will not be used.  Click on “Create impulse” on the left navigation, and you should see both Classes are still the same, Jasmine and Basmati.  Click on Image on the left, keep it on RGB, and click “Save parameters”.  On the next page click on “Generate features” to again build a visualization, now using our own images we collected.  We can see once again the overlap in this data, as these varieties of rice are extremely similar looking and a larger dataset should be used.  But let’s proceed and see what happens. 
+
+![](img/features-3.png)
+
+Click on Transfer Learning on the left navigation, leave the settings the same as previously, and click on “Start Training”. 
 
 
 
