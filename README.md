@@ -10,7 +10,13 @@ While on a recent work trip, I had the opportunity to learn about rice farming, 
 
 But the supply chain and logistics of transporting and shipping rice, needs different solutions.  There is of course an IoT component once again, where temperature and humidity are monitored as rice is stored in large mounds, prior to being bagged or boxed for sale.  But one interesting problem experienced in the warehousing portion of the supply chain, is simply identifying what type of rice is even being stored and moved around.
 
+Many countries set export quotas for rice so there are a multitude of varieties being transported all over the globe. These arrive in containers and either go straight into the rice processing factory or alternatively stored in agricultural sheds in the interim.
+
+For example in the UK, one company imports over 15 different types of rice from all over the world including Myanmar medium grain, Paraguayan long grain, Argentine long grain, and Sharbati from India.
+
 ![](img/bulk-rice.jpg)
+
+Depending on the tonnage that needs to be stored, often the agricultural buildings are too big for just one variety of rice. In these situations, the shed is segmented by concrete wall and different rice can be stored in different sections within the same shed.
 
 It turns out, there are experts who have enough experience with the various strains of rice that they can simply look at a few grains and identify the rice as Basmati, Jasmine, Ipsala, Arborio, or other varieties.  But to most common truck drivers, loading workers, and bulk storage staff, rice strains are indistinguishable from one another.  This prompted us to look closer at the problem, and explore the current limits of data and computer vision capabilities.
 
@@ -142,4 +148,12 @@ To push this new model to the phone, click on “Deployment”, and again scroll
 Even with only 139 images in my dataset this time, the more representative images help, and I am able to classify Basmati versus Jasmine with moderate success.  More images would certainly help, and maybe additional training cycles or Neural network parameter fine tuning could also improve accuracy, but the model does work!
 
 <img src="img/inference-3.png" width="500">
+
+## Conclusion
+
+The main research goal of this project was to determine if computer vision could be used to help logistics, warehouse, and distribution workers identify rice varieties, to avoid costly mistakes in transporting incorrect types of rice through the supply chain.  For a non-expert in rice grains, simply pointing a smart phone at a few grains of rice and having an accurate classification could be a great way to validate or verify a shipment prior to loading a truck and shipping the rice.
+
+Overall, the approach is viable, and although it pushes the boundary of computer vision, like all machine learning projects the most important factor is the data.  With a dataset that matches the target environment, and a large sample size of images representing the exact variety of rice, it does appear to be possible.  Using a public dataset, we were able to demonstrate successful classification of rice varieties that are rather easy to distinguish between, but when choosing varieties that are extremely similar in appearance this became more difficult.  This is likely due to the discrepancy in environmental conditions between the public dataset images, and my own local lighting, camera, and ultimately, rice grains.  
+
+However, when transitioning to collecting my own data, even with a limited quantity of images, the end model was able to classify between the varieties successfully for the most part.  More images, additional training cycles, and some modifications to parameters could help improve the accuracy, and make this a viable solution for supply chain workers to use for validation of rice variety prior to shipment.
 
