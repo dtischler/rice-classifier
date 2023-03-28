@@ -20,7 +20,7 @@ It turns out, there are experts who have enough experience with the various stra
 
 The goal of the project is to determine whether or not we can use Image Classification to accurately identify the variety of rice in front of a camera.  Generally speaking this means training a machine learning model on a dataset of known rice strains, and then deploying the model to a device to try to make accurate predictions of rice grain varieties.  We’ll use Edge Impulse in this project, to collect data, build the model, and deploy the model to a device.  
 
-![](img/rice.jpg)
+<img src="img/rice.jpg" width="500">
 
 ## Dataset Curation
 
@@ -99,7 +99,7 @@ To find out, click on Transfer Learning on the left, verify that the settings ma
 
 ![](img/training-3.png)
 
-You can use the QR code to once again launch inferencing directly in the phone’s browser, and placing a few grains of Basmati and a few grains of Jasmine next to each other, I found that the model is far less accurate, and has trouble correctly identifying the species of rice.  In some cases, it is simply incorrect, in others the model flips back and forth between Basmati, Jasmine, or “Uncertain”, meaning it simply can’t figure out which variety it is.  Of course, it did get some correct, but overall the model was not reliable enough to consider it a success.  Perhaps additional training cycles could help, or, modifying parameters and creating a fine-tuned model can help improve functionality.  But let’s also consider the dataset for a moment.  Essentially, we used _someone else’s_ data, and while it’s great they made their work public, unless we replicate their exact conditions, our environment does not match their environment.  Do we know anything about the lighting they used?  Do we know the exact distance from the camera to the rice grain, and what level of zoom they used?  What about the pure black background, which I do not have replicated here?  Thus, with 15,000 images exhibiting those pre-defined conditions, but my local conditions not being an exact match, our model is not generalized enough to be effective in my situation.  
+You can use the QR code to once again launch inferencing directly in the phone’s browser, and placing a few grains of Basmati and a few grains of Jasmine next to each other, I found that the model is far less accurate, and has trouble correctly identifying the species of rice.  In some cases, it is simply incorrect, in others the model flips back and forth between Basmati, Jasmine, or “Uncertain”, meaning it simply can’t figure out which variety it is.  Of course, it did get some correct, but overall the model was not reliable enough to consider it a success.  Perhaps additional training cycles could help, or, modifying parameters and creating a fine-tuned model can help improve functionality.  But let’s also consider the dataset for a moment.  Essentially, we used _someone else’s_ data, and while it’s great they made their work public, unless we replicate their exact conditions, our environment does not match their environment.  Do we know anything about the lighting they used?  Do we know the exact distance from the camera to the rice grain, and what level of zoom they used?  What about the pure black background, which I do not have replicated here?  And most importantly of all, what if the **exact** grains of Jasmine or Basmati are not **precisely** the same as what was bagged and distributed, that I then purchased at my local grocery store.  Use Basmati as an example.  Are there very subtle differences even between Basmati?  A quick Google search indicates there are nearly a dozen varieties of just Basmati.  I am not sure if my Basmati is the **exact** same as the Basmati used in the dataset (the same goes for Jasmine).    Thus, with 15,000 images exhibiting those pre-defined conditions, but my local conditions not being an exact match, our model is not generalized enough to be effective in my situation.  
 
 While it was convenient to use ready-made data, unless we replicate the precise conditions used when those images of rice were collected, our model performance will suffer.  
 
@@ -120,6 +120,8 @@ Once it has finished, click on Data Acquisition on the left navigation, and we a
 Now it is time to take your own pictures, so have your rice ready!  Click on Dashboard on the left navigation, and scan the QR code on the right side of the page with your cell phone, to put your phone into data collection mode.  If the inferencing starts (using the last model we built), simply tap on “Switch to data collection mode” below the camera view.  Tap on “Label” above the camera view, to set the label for the first type of rice to be collected, I’ll go with Basmati first.  
 
 ![](img/collection-1.png)
+
+![](img/collection-2.png)
 
 You can take pictures by clicking on “Capture”.  Using a few grains of Basmati, zoom in close and take pictures, varying the rotation, lighting and shadows, position in the frame, and build up a collection of a few hundred images if possible.  If you have the Studio open, you will the images stream in to the Data Acquisition page as they are taken.  Repeat the process for Jasmine, making sure that you set the Label accordingly when you transition from Basmati to Jasmine (or your preferred variety of rice).  
 
