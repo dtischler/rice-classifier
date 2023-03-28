@@ -119,9 +119,9 @@ Once it has finished, click on Data Acquisition on the left navigation, and we a
 
 Now it is time to take your own pictures, so have your rice ready!  Click on Dashboard on the left navigation, and scan the QR code on the right side of the page with your cell phone, to put your phone into data collection mode.  If the inferencing starts (using the last model we built), simply tap on “Switch to data collection mode” below the camera view.  Tap on “Label” above the camera view, to set the label for the first type of rice to be collected, I’ll go with Basmati first.  
 
-![](img/collection-1.png)
+<img src="img/collection-1.png" width="500">
 
-![](img/collection-2.png)
+<img src="img/collection-2.png" width="500">
 
 You can take pictures by clicking on “Capture”.  Using a few grains of Basmati, zoom in close and take pictures, varying the rotation, lighting and shadows, position in the frame, and build up a collection of a few hundred images if possible.  If you have the Studio open, you will the images stream in to the Data Acquisition page as they are taken.  Repeat the process for Jasmine, making sure that you set the Label accordingly when you transition from Basmati to Jasmine (or your preferred variety of rice).  
 
