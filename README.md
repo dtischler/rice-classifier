@@ -71,7 +71,7 @@ When we uploaded the images earlier, we left **Automatically split between train
 
 ![](img/testing-1.png)
 
-With Model Testing looking very encouraging, let’s go ahead and try out the model in the real world by using it directly on a smartphone.  Simply click on “Deployment” on the left, scroll down to the bottom and click on Smartphone, and click “Build”.  A modal will open up with a QR code, use your phone’s camera to scan the code and launch its web browser, the project will take a moment to compile, and then inferencing will begin right  on your phone!  
+With Model Testing looking very encouraging, let’s go ahead and try out the model in the real world by using it directly on a smartphone.  Simply click on “Deployment” on the left, scroll down to the bottom and click on “Mobile Phone”, and click “Build”.  A modal will open up with a QR code, use your phone’s camera to scan the code and launch its web browser, the project will take a moment to compile, and then inferencing will begin right on your phone!  
 
 ![](img/build.png)
 
@@ -127,15 +127,19 @@ You can take pictures by clicking on “Capture”.  Using a few grains of Basma
 
 ![](img/dataset-2.png)
 
-Once you have a few hundred images of each collected, we can once again build a model.  Note that the count of items still indicates the disabled data, 36,139 in my case, though the disabled data will not be used.  Click on “Create impulse” on the left navigation, and you should see both Classes are still the same, Jasmine and Basmati.  Click on Image on the left, keep it on RGB, and click “Save parameters”.  On the next page click on “Generate features” to again build a visualization, now using our own images we collected.  We can see once again the overlap in this data, as these varieties of rice are extremely similar looking and a larger dataset should be used.  But let’s proceed and see what happens. 
+Once you have a few hundred images of each collected, we can once again build a model (I’ve been a bit brief in this exercise, and only have 139 in my case, which might not be enough).  Click on “Create impulse” on the left navigation, and you should see both Classes are still the same, Jasmine and Basmati.  Click on Image on the left, keep it on RGB, and click “Save parameters”.  On the next page click on “Generate features” to again build a visualization, now using our own images we collected.  We can see once again the overlap in this data, as these varieties of rice are extremely similar looking and a larger dataset should be used.  But let’s proceed and see what happens. 
 
 ![](img/features-3.png)
 
 Click on Transfer Learning on the left navigation, leave the settings the same as previously, and click on “Start Training”. 
 
+Even with only 139 images, the built model was able to effectively predict between the types of rice, but we’ll need to try it in the real world to see how accurate it is in practice.  
 
+![](img/training-4.png)
 
+To push this new model to the phone, click on “Deployment”, and again scroll down and click on “Mobile phone”, then click “Build”.  Open the QR code on your phone, and wait for the model to load into the phone’s browser.
 
+Even with only 139 images in my dataset this time, the more representative images help, and I am able to classify Basmati versus Jasmine with moderate success.  More images would certainly help, and maybe additional training cycles or Neural network parameter fine tuning could also improve accuracy, but the model does work!
 
-
+<img src="img/inference-3.png" width="500">
 
