@@ -16,7 +16,7 @@ For example in the UK, one company imports over 15 different types of rice from 
 
 ![](img/bulk-rice.jpg)
 
-Depending on the tonnage that needs to be stored, often the agricultural buildings are too big for just one variety of rice. In these situations, the shed is segmented by concrete wall and different rice can be stored in different sections within the same shed.
+Depending on the tonnage that needs to be stored, often the agricultural buildings are too big for just one variety of rice. In these situations, the shed is segmented by concrete walls and different rice can be stored in different sections within the same shed.
 
 It turns out, there are experts who have enough experience with the various strains of rice that they can simply look at a few grains and identify the rice as Basmati, Jasmine, Ipsala, Arborio, or other varieties.  But to most common truck drivers, loading workers, and bulk storage staff, rice strains are indistinguishable from one another.  This prompted us to look closer at the problem, and explore the current limits of data and computer vision capabilities.
 
