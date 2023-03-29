@@ -157,3 +157,4 @@ Overall, the approach is viable, and although it pushes the boundary of computer
 
 However, when transitioning to collecting my own data, even with a limited quantity of images, the end model was able to classify between the varieties successfully for the most part.  More images, additional training cycles, and some modifications to parameters could help improve the accuracy, and make this a viable solution for supply chain workers to use for validation of rice variety prior to shipment.
 
+![](img/rice-2.jpg)
