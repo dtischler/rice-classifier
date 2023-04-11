@@ -2,7 +2,7 @@
 
 # Using Rice to Explore Dataset Quality and Test the Limits of Computer Vision
 
-![](img/rice-field-1.jpg)
+![](img/bali-4.jpg)
 
 ## Introduction
 
